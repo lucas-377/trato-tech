@@ -1,6 +1,11 @@
 import styles from "./Header.module.scss";
 
-export default function Header({ title, description, className = "", image }) {
+export default function Header({
+  title,
+  description,
+  className = "",
+  image = "",
+}) {
   return (
     <header className={`${styles.header} ${className}`}>
       <div className={styles["header-texto"]}>
@@ -9,7 +14,7 @@ export default function Header({ title, description, className = "", image }) {
       </div>
 
       <div className={styles["header-imagem"]}>
-        <img src={image} alt={title} />
+        {image && <img src={image} alt={title} />}
       </div>
     </header>
   );
