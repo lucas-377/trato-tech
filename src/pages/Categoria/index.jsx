@@ -8,12 +8,18 @@ import styles from "./Categoria.module.scss";
 export default function Categoria() {
   const { nomeCategoria } = useParams();
 
-  const { category, items } = useSelector((state) => ({
-    category: state.categories.find(
-      (category) => category.id === nomeCategoria
-    ),
-    items: state.items.filter((item) => item.categoria === nomeCategoria),
-  }));
+  const { category, items } = useSelector((state) => {
+    const regexp = new RegExp(state.search, "i");
+
+    return {
+      category: state.categories.find(
+        (category) => category.id === nomeCategoria
+      ),
+      items: state.items.filter(
+        (item) => item.categoria === nomeCategoria && item.titulo.match(regexp)
+      ),
+    };
+  });
 
   return (
     <div>
